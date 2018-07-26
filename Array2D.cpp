@@ -25,18 +25,21 @@ Array2D<T>::Array2D(int rowcount, int colcount){
 		cout << "Constructed" << endl;
 	}
 
-
-	//Copy constructor
-//	Array2D(const Array2D& other){
-//		cout << "Created by copying\n";
-//	}
+//template<typename T>
+//Array2D<T>::~Array2D() {
+//	for(int i = 0; i < rowCount; ++i) {
+//		delete [] array[i];
+//		}
+//		delete [] array;
+//		cout << "Deleted\n";
+//}
 
 template <typename T>
 void Array2D<T>::m_setDoubleValues(){
 	double m_value = 1.1;
-	for(int i = 0; i< rowCount; i++){
-		for(int j=0; j< colCount; j++){
-			array[i][j] = m_value;
+	for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
+		for(int colLoop=0; colLoop< colCount; colLoop++){
+			array[rowLoop][colLoop] = m_value;
 				m_value++;
 			}
 		}
@@ -69,21 +72,65 @@ Array2D<T> Array2D<T>::operator+(const Array2D<T>& other){
 	//declare a matrix temp of type T to store the result and return this matrix
 Array2D<double> temp(rowCount,colCount);
 for(int i = 0; i < rowCount; i++)
-for(int j = 0; j < colCount; j++)
-temp.array[i][j] = (*this).array[i][j] + other.array[i][j];
-return temp;
+ for(int j = 0; j < colCount; j++)
+  temp.array[i][j] = (*this).array[i][j] + other.array[i][j];
+ return temp;
 }
 
 
 
 template <typename T>
 Array2D<T>& Array2D<T>::operator += (const int val) {
-	for(unsigned i=0; i<rowCount; i++) {
-		for(unsigned j=0; j<colCount; j++) {
+	for(unsigned int i=0; i<rowCount; i++) {
+		for(unsigned int j=0; j<colCount; j++) {
 	      (*this).array[i][j] += val;
 	    }
 	}
 	return *this;
 }
 
+template <typename T>
+T Array2D<T>::operator () (int row, int col){
+	return array[row][col];
+}
 
+template <typename T>
+int Array2D<T>::getRows(){
+	return this->rowCount;
+}
+
+template <typename T>
+int Array2D<T>::getCols(){
+	return this->colCount;
+}
+
+template <typename T>
+bool Array2D<T>::operator == (const Array2D<T>& other){
+	for(int i=0; i<3; i++){
+		for(int j=0; j<3; j++){
+			if((*this).array[i][j] == other.array[i][j]){
+					return true;
+				}
+				else
+					return false;
+		}
+	}
+}
+
+template <typename T>
+bool Array2D<T>::operator != (const Array2D<T>& other){
+	for(int i=0; i<3; i++){
+		for(int j=0; j<3; j++){
+			if((*this).array[i][j] != other.array[i][j]){
+					return false;
+				}
+				else
+					return true;
+		}
+	}
+}
+//template <typename T>
+//T Array2D<T>::operator ++ (const Array2D<T>& other){
+//	if()
+//
+//}

@@ -21,30 +21,37 @@ private:
 public:
 
 	Array2D(int rowcount, int colcount);
+	//~Array2D();
 	void m_setDoubleValues();
 	void m_displayValues();
 
 	void m_setStringValues();
+	int getRows();
+	int getCols();
 
 	Array2D<T> operator+(const Array2D<T>& other);
 	Array2D<T>& operator += (const int val);
+	T operator()(int row, int col);
+	bool operator == (const Array2D<T>& other);
+	bool operator != (const Array2D<T>& other);
+	//T operator ++ (const Array2D<T>& other, int index);
 
 
-//template<typename U>
-// class Proxy {
-//    public:
-//        Proxy(T* _array) : _array(_array) { }
-//
-//	        T operator[](int index) {
-//	            return _array[index];
-//	        }
-//	    private:
-//	        T* _array;
-//	    };
-//
-//	Proxy <double> operator[](int index) {
-//	        return Proxy<double>(array[index]);
-//	    }
+template<typename U>
+ class Proxy {
+    public:
+        Proxy(T* _array) : _array(_array) { }
+
+	    T operator[](int index) {
+	    	return _array[index];
+	    }
+	    private:
+	        T* _array;
+	    };
+
+	Proxy <double> operator[](int index) {
+	        return Proxy<double>(array[index]);
+	    }
 
 //	~Array2D(){
 //		for(int i = 0; i < rowCount; ++i) {
@@ -53,6 +60,8 @@ public:
 //		delete [] array;
 //		cout << "Deleted\n";
 //	}
+
+
 };
 
 
