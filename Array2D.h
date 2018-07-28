@@ -17,12 +17,16 @@ private:
 	T ** array;
 	int rowCount;
 	int colCount;
+	int maxValue;
 
 public:
 
-	Array2D(int rowcount, int colcount);
+	Array2D(int rowcount, int colcount, const int max = 1000);
+	Array2D<T>(const Array2D<T>& other);
+	void allocate();
 	//~Array2D();
 	void m_setDoubleValues();
+	void m_getValues();
 	void m_displayValues();
 
 	void m_setStringValues();
@@ -34,6 +38,8 @@ public:
 	T operator()(int row, int col);
 	bool operator == (const Array2D<T>& other);
 	bool operator != (const Array2D<T>& other);
+	Array2D<T>& operator ++ (int);
+	//Array2D<T> operator ++ ();
 	//T operator ++ (const Array2D<T>& other, int index);
 
 
