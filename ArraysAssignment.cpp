@@ -62,9 +62,12 @@ int main() {
 	cout << "After adding " << scalarValue << " to the matrix, the resulting matrix is \n";
 	doubleArray.m_displayValues();
 
-	cout << "After Post Increment:" << endl;
+	//cout << "After Post Increment:" << endl;
 	doubleArray++;
 	//doubleArray.m_displayValues();
+
+	cout << "Matrix, after pre increment operation:\n";
+	++doubleArray;
 	doubleArray.m_displayValues();
 
 	cout << "Enter the row you would like to fetch\n";

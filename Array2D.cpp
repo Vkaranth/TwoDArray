@@ -30,17 +30,19 @@ void Array2D<T>::allocate(){
 	  array[i] = new T[colCount];
 }
 
-//template<typename T>
-//Array2D<T>::~Array2D() {
-//	for(int i = 0; i < rowCount; i++) {
-//		delete array[i];
-//	}
-//	delete array;
-//	cout << "Deleted\n";
-//}
+template<typename T>
+Array2D<T>::~Array2D() {
+	for(int i = 0; i < rowCount; i++) {
+		delete[] array[i];
+	}
+	delete[] array;
+	cout << "Deleted\n";
+}
 
 template <typename T>
-Array2D<T>::Array2D(const Array2D<T>& other){ //other id old object
+Array2D<T>::Array2D(const Array2D<T>& other){ //other is old object;
+	//We are doing the operation of - Array2D<T> new_obj(old_obj); So we are passing old_obj
+	//and it is fetched by 'other'. new_obj is the one that is calling this function and it will be considered as 'this';
 	cout << "Inside Copy constructor \n";
 
 	rowCount = other.rowCount;
@@ -53,11 +55,7 @@ Array2D<T>::Array2D(const Array2D<T>& other){ //other id old object
 		}
 	}
 }
-//
 
-//Array2D<T>(const Array2D<T>& other) {				//Copy constructor
-//		cout << "Created by copying\n";
-//	}
 
 template <typename T>
 void Array2D<T>::m_setDoubleValues(){
@@ -130,6 +128,17 @@ Array2D<T>& Array2D<T>::operator ++ (int) {
 	//Array2D<double> temp(rowCount,colCount);
 
 	cout << "Inside post Increment\n";//Working as pre increment
+	cout << "New values of matrix\n";
+	this->m_displayValues();
+	*this += 1;
+	return *(this);
+}
+
+template <typename T>
+Array2D<T>& Array2D<T>::operator ++ () {
+	//Array2D<double> temp(rowCount,colCount);
+
+	cout << "Inside pre Increment\n";//Working as pre increment
 	*this += 1;
 	return *(this);
 }
