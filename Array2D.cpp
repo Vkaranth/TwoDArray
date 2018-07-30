@@ -104,7 +104,7 @@ void Array2D<T>::m_setStringValues(){
 
 template <typename T>
 Array2D<T> Array2D<T>::operator+(const Array2D<T>& other){
-	Array2D<double> temp(rowCount,colCount);
+	Array2D<T> temp(rowCount,colCount,1000);
 	for(int rowLoop = 0; rowLoop < rowCount; rowLoop++)
 		for(int colLoop = 0; colLoop < colCount; colLoop++)
 			temp.array[rowLoop][colLoop] = (*this).array[rowLoop][colLoop] + other.array[rowLoop][colLoop];
@@ -128,7 +128,7 @@ Array2D<T>& Array2D<T>::operator ++ (int) {
 	//Array2D<double> temp(rowCount,colCount);
 
 	cout << "Inside post Increment\n";//Working as pre increment
-	cout << "New values of matrix\n";
+	cout << "Values of matrix:\n";
 	this->m_displayValues();
 	*this += 1;
 	return *(this);

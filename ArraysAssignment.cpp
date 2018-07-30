@@ -43,81 +43,209 @@ int main() {
 	doubleArray.m_displayValues();
 
 	Array2D<double> doubleArrayTwo = doubleArray;
+	cout << "Enter the operation to be performed\n1.Matrix addition\n2.Pre-increment\n3.Post-increment\n4.Scalar addition\n5.Fetch element from matrix\n6.MAtrix Comparison\n";
+	int choice;
+	cin >> choice;
 
-	doubleArrayTwo.m_setDoubleValues();
-
-	//cout << doubleArrayTwo.rowCount;
-	cout << "Another array considered is " << endl;
-	doubleArrayTwo.m_displayValues();
-
-	cout << "The sum of the two matrices are " << endl;
-	Array2D <double> sum = doubleArray + doubleArrayTwo;
-	sum.m_displayValues();
-
-	cout << "Enter the scalar value to add to the matrix\n";
-	int scalarValue;
-	cin>> scalarValue;
-	doubleArray += scalarValue;
-
-	cout << "After adding " << scalarValue << " to the matrix, the resulting matrix is \n";
-	doubleArray.m_displayValues();
-
-	//cout << "After Post Increment:" << endl;
-	doubleArray++;
-	//doubleArray.m_displayValues();
-
-	cout << "Matrix, after pre increment operation:\n";
-	++doubleArray;
-	doubleArray.m_displayValues();
-
-	cout << "Enter the row you would like to fetch\n";
 	int rowToFetch;
-	do{
-		cin >> rowToFetch;
-		if(rowToFetch >= rowCount){
-		cout << "Invalid input. The number of rows are " << rowCount << endl;
-		}
-	}while(rowToFetch >= rowCount);
-
-	cout << "Enter the column you would like to fetch\n";
 	int colToFetch;
 
-	do{
-		cin >> colToFetch;
-		if(colToFetch >= colCount){
-			cout << "Invalid input. The number of columns are " << colCount << endl;
-	    }
-	}while(colToFetch >= colCount);
+	switch(choice){
+	case 1:
+		cout << "The first matrix is:\n";
+		doubleArray.m_displayValues();
+		cout << "Would you like to manually enter values for another numeric matrix to add with the present matrix?(y/n)?\n";
+		char enterAnotherMatrix;
+		cin >> enterAnotherMatrix;
 
-	cout << "The element at row "<< rowToFetch << " and column " <<colToFetch << " using subscript operator overloading is " <<doubleArray[rowToFetch][colToFetch] << endl;
-	cout << "The element at row "<< rowToFetch << " and column " <<colToFetch << " using functor operator is " << doubleArray(rowToFetch,colToFetch) << endl;
+		if(enterAnotherMatrix == 'yes' || enterAnotherMatrix == 'y'){
+			Array2D<double> doubleArrayThree(rowCount, colCount);
+			cout << "Enter array entries\n";
+			doubleArrayThree.m_getValues();
+			doubleArrayThree.m_displayValues();
+			cout << "The sum of the two matrices are " << endl;
+			Array2D <double> sum = doubleArray + doubleArrayThree;
+			sum.m_displayValues();
+		}
+		else{
+
+			doubleArrayTwo.m_setDoubleValues();
+
+			//cout << doubleArrayTwo.rowCount;
+			cout << "Another array considered is " << endl;
+			doubleArrayTwo.m_displayValues();
+
+			cout << "The sum of the two matrices are " << endl;
+			Array2D <double> sum = doubleArray + doubleArrayTwo;
+			cout << "Reached here, after adding\n";
+			sum.m_displayValues();
+
+		 }
+		break;
+
+	case 2:
+		cout << "Matrix, after pre increment operation:\n";
+		++doubleArray;
+		doubleArray.m_displayValues();
+
+		break;
+
+	case 3:
+		cout << "After Post Increment:" << endl;
+		doubleArray++;
+		doubleArray.m_displayValues();
+
+		break;
+
+	case 4:
+		cout << "Enter the scalar value to add to the matrix\n";
+		int scalarValue;
+		cin>> scalarValue;
+		doubleArray += scalarValue;
+
+		cout << "After adding " << scalarValue << " to the matrix, the resulting matrix is \n";
+		doubleArray.m_displayValues();
+
+		break;
+
+	case 5:
+		cout << "Enter the row you would like to fetch\n";
+		do{
+			cin >> rowToFetch;
+			if(rowToFetch >= rowCount){
+			cout << "Invalid input. The number of rows are " << rowCount << endl;
+		    }
+		}while(rowToFetch >= rowCount);
+
+		cout << "Enter the column you would like to fetch\n";
+		do{
+			cin >> colToFetch;
+			if(colToFetch >= colCount){
+				cout << "Invalid input. The number of columns are " << colCount << endl;
+		    }
+		}while(colToFetch >= colCount);
+
+		cout << "The element at row "<< rowToFetch << " and column " <<colToFetch << " using subscript operator overloading is " <<doubleArray[rowToFetch][colToFetch] << endl;
+		cout << "The element at row "<< rowToFetch << " and column " <<colToFetch << " using functor operator is " << doubleArray(rowToFetch,colToFetch) << endl;
+
+		break;
+
+	case 6:
+		cout << "Matrix available for comparison is :\n";
+		doubleArray.m_displayValues();
+		cout << "Would you like to manually enter values for another numeric matrix to compare with the present matrix?(y/n)?";
+		//enterAnotherMatrix;
+		cin >> enterAnotherMatrix;
+
+		if(enterAnotherMatrix == 'yes' || enterAnotherMatrix == 'y'){
+			Array2D<double> doubleArrayThree = doubleArray;
+			doubleArrayThree.m_getValues();
+
+			if(doubleArray == doubleArrayThree){
+			cout << "Matrices are equal" << endl;
+		    }
+
+		    else{
+			cout << "Matrices are unequal" << endl;
+		    }
+		}
+
+		else{
+			doubleArrayTwo.m_setDoubleValues();
+			if(doubleArray != doubleArrayTwo){
+				cout << "Matrices are not equal" << endl;
+			}
+			else{
+				cout << "Matrices are equal" << endl;
+			}
+		}
+		break;
+	default:
+		cout << "Invalid choice\n";
+		break;
+}
+
+//	Array2D<double> doubleArrayTwo = doubleArray;
+//
+//	doubleArrayTwo.m_setDoubleValues();
+//
+//	//cout << doubleArrayTwo.rowCount;
+//	cout << "Another array considered is " << endl;
+//	doubleArrayTwo.m_displayValues();
+//
+//	cout << "The sum of the two matrices are " << endl;
+//	Array2D <double> sum = doubleArray + doubleArrayTwo;
+//	sum.m_displayValues();
+
+//	cout << "Enter the scalar value to add to the matrix\n";
+//	int scalarValue;
+//	cin>> scalarValue;
+//	doubleArray += scalarValue;
+//
+//	cout << "After adding " << scalarValue << " to the matrix, the resulting matrix is \n";
+//	doubleArray.m_displayValues();
+
+	//cout << "After Post Increment:" << endl;
+	//doubleArray++;
+	//doubleArray.m_displayValues();
+
+//	cout << "Matrix, after pre increment operation:\n";
+//	++doubleArray;
+//	doubleArray.m_displayValues();
+
+//	cout << "Enter the row you would like to fetch\n";
+//	int rowToFetch;
+//	do{
+//		cin >> rowToFetch;
+//		if(rowToFetch >= rowCount){
+//		cout << "Invalid input. The number of rows are " << rowCount << endl;
+//		}
+//	}while(rowToFetch >= rowCount);
+//
+//	cout << "Enter the column you would like to fetch\n";
+//	int colToFetch;
+//
+//	do{
+//		cin >> colToFetch;
+//		if(colToFetch >= colCount){
+//			cout << "Invalid input. The number of columns are " << colCount << endl;
+//	    }
+//	}while(colToFetch >= colCount);
+//
+//	cout << "The element at row "<< rowToFetch << " and column " <<colToFetch << " using subscript operator overloading is " <<doubleArray[rowToFetch][colToFetch] << endl;
+//	cout << "The element at row "<< rowToFetch << " and column " <<colToFetch << " using functor operator is " << doubleArray(rowToFetch,colToFetch) << endl;
 
 	stringArray.m_setStringValues();
 
 	cout << "String 2D array:\n";
 	stringArray.m_displayValues();
 
+	Array2D<string> stringArrayTwo = stringArray;
+	Array2D<string> stringSum = stringArray + stringArrayTwo;
+	stringSum.m_displayValues();
 
+	//++stringArray;
 	cout << "The element at row "<< rowToFetch << " and column " <<colToFetch << " of String matrix, using functor operator overloading is " << stringArray[rowToFetch][colToFetch] << endl;
 	//cout << stringArray(rowToFetch,colToFetch) << endl;
 
-	if(doubleArray == doubleArrayTwo){
-		cout << "Matrices are equal" << endl;
-	}
-
-	else{
-		cout << "Matrices are unequal" << endl;
-	}
-
-	if(doubleArray != doubleArrayTwo){
-		cout << "Matrices are equal" << endl;
-	}
-
-	else{
-		cout << "Matrices are unequal" << endl;
-	}
-	return 0;
+//	if(doubleArray == doubleArrayTwo){
+//		cout << "Matrices are equal" << endl;
+//	}
+//
+//	else{
+//		cout << "Matrices are unequal" << endl;
+//	}
+//
+//	if(doubleArray != doubleArrayTwo){
+//		cout << "Matrices are equal" << endl;
+//	}
+//
+//	else{
+//		cout << "Matrices are unequal" << endl;
+//	}
 }
+
+
 
 
 
