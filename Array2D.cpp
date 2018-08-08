@@ -1,7 +1,7 @@
 /*
- * Array2D.cpp
+ * Array.cpp
  *
- *  Created on: Jul 25, 2018
+ *  Created on: Jul 30, 2018
  *      Author: karanv3
  */
 
@@ -30,19 +30,8 @@ void Array2D<T>::allocate(){
 	  array[i] = new T[colCount];
 }
 
-template<typename T>
-Array2D<T>::~Array2D() {
-	for(int i = 0; i < rowCount; i++) {
-		delete[] array[i];
-	}
-	delete[] array;
-	cout << "Deleted\n";
-}
-
 template <typename T>
-Array2D<T>::Array2D(const Array2D<T>& other){ //other is old object;
-	//We are doing the operation of - Array2D<T> new_obj(old_obj); So we are passing old_obj
-	//and it is fetched by 'other'. new_obj is the one that is calling this function and it will be considered as 'this';
+Array2D<T>::Array2D(const Array2D& other){ //other id old object
 	cout << "Inside Copy constructor \n";
 
 	rowCount = other.rowCount;
@@ -55,7 +44,6 @@ Array2D<T>::Array2D(const Array2D<T>& other){ //other is old object;
 		}
 	}
 }
-
 
 template <typename T>
 void Array2D<T>::m_setDoubleValues(){
@@ -72,14 +60,25 @@ template <typename T>
 void Array2D<T>::m_getValues(){
 	for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
 		for(int colLoop=0; colLoop< colCount; colLoop++){
-			cin >> array[rowLoop][colLoop];
-			if(array[rowLoop][colLoop] > maxValue){
-				cout << "You entered value higher than Maximum Value, that is 1000. Exiting. . .";
-				exit(0);
-			}
+			do{
+				cin >> array[rowLoop][colLoop];
+				if(array[rowLoop][colLoop] > maxValue){
+					cout << "You entered value higher than Maximum Value, that is 1000. Re enter lesser value than 1000\n";
+				}
+			}while(array[rowLoop][colLoop] > maxValue);
+
 		}
 	}
 }
+
+template <typename T>
+void Array2D<T>::m_getStringValues(){
+	for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
+		for(int colLoop=0; colLoop< colCount; colLoop++){
+			cin >> array[rowLoop][colLoop];
+			}
+		}
+	}
 
 template <typename T>
 void Array2D<T>::m_displayValues(){
@@ -92,35 +91,12 @@ void Array2D<T>::m_displayValues(){
 }
 
 template <typename T>
-void Array2D<T>::m_setStringValues(){
-	char m_value = 'A';
-	for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
-		for(int colLoop=0; colLoop< colCount; colLoop++){
-			array[rowLoop][colLoop] = m_value;
-			m_value++;
-		}
-	}
-}
-
-template <typename T>
 Array2D<T> Array2D<T>::operator+(const Array2D<T>& other){
-	Array2D<T> temp(rowCount,colCount,1000);
+	Array2D<T> temp(rowCount,colCount);
 	for(int rowLoop = 0; rowLoop < rowCount; rowLoop++)
 		for(int colLoop = 0; colLoop < colCount; colLoop++)
 			temp.array[rowLoop][colLoop] = (*this).array[rowLoop][colLoop] + other.array[rowLoop][colLoop];
 	return temp;
-}
-
-
-
-template <typename T>
-Array2D<T>& Array2D<T>::operator += (const int val) {
-	for(int rowLoop=0; rowLoop<rowCount; rowLoop++) {
-		for(int colLoop=0; colLoop<colCount; colLoop++) {
-	      (*this).array[rowLoop][colLoop] += val;
-	    }
-	}
-	return *this;
 }
 
 template <typename T>
@@ -128,7 +104,6 @@ Array2D<T>& Array2D<T>::operator ++ (int) {
 	//Array2D<double> temp(rowCount,colCount);
 
 	cout << "Inside post Increment\n";//Working as pre increment
-	cout << "Values of matrix:\n";
 	this->m_displayValues();
 	*this += 1;
 	return *(this);
@@ -144,18 +119,20 @@ Array2D<T>& Array2D<T>::operator ++ () {
 }
 
 template <typename T>
+Array2D<T>& Array2D<T>::operator += (const int val) {
+	for(int rowLoop=0; rowLoop<rowCount; rowLoop++) {
+		for(int colLoop=0; colLoop<colCount; colLoop++) {
+	      (*this).array[rowLoop][colLoop] += 'A';
+	    }
+	}
+	return *this;
+}
+
+
+
+template <typename T>
 T Array2D<T>::operator () (int row, int col){
 	return array[row][col];
-}
-
-template <typename T>
-int Array2D<T>::getRows(){
-	return this->rowCount;
-}
-
-template <typename T>
-int Array2D<T>::getCols(){
-	return this->colCount;
 }
 
 template <typename T>
@@ -164,7 +141,7 @@ bool Array2D<T>::operator == (const Array2D<T>& other){
 		for(int colLoop=0; colLoop<3; colLoop++){
 			if((*this).array[rowLoop][colLoop] == other.array[rowLoop][colLoop]){
 					return true;
-				}
+			}
 			else
 				return false;
 		}
@@ -177,10 +154,20 @@ bool Array2D<T>::operator != (const Array2D<T>& other){
 		for(int colLoop=0; colLoop<3; colLoop++){
 			if((*this).array[rowLoop][colLoop] != other.array[rowLoop][colLoop]){
 					return false;
-				}
+			}
 			else
 				return true;
 		}
 	}
 }
 
+template <typename T>
+void Array2D<T>::m_setStringValues(){
+	char m_value = 'A';
+	for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
+		for(int colLoop=0; colLoop< colCount; colLoop++){
+			array[rowLoop][colLoop] = m_value;
+			m_value++;
+		}
+	}
+}
