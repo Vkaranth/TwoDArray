@@ -24,13 +24,13 @@ public:
 	Array2D(int rowcount, int colcount, const int max = 1000);
 	Array2D<T>(const Array2D<T>& other);
 	void allocate();
-	void m_setIncrementedValue();
-	void m_setDoubleValues();
-	void m_setStringValues();
-	void m_getValues();
-	void m_getStringValues();
-	void m_displayValues();
-	void m_postIncrementString();
+	void setIncrementedValue();
+	void setDoubleValues();
+	void setStringValues();
+	void getValues();
+	void getStringValues();
+	void displayValues();
+	void postIncrementString();
 
 	Array2D<T> operator+(const Array2D<T>& other);
 	Array2D<T>& operator += (const int val);

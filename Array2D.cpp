@@ -29,13 +29,13 @@ template <typename T>
 void Array2D<T>::allocate(){
 	array = new T*[rowCount];
 
-			//Array initialization
+	//Array initialization
 	for(int i = 0; i < rowCount; ++i)
 	  array[i] = new T[colCount];
 }
 
 template <typename T>
-Array2D<T>::Array2D(const Array2D& other){ //other id old object
+Array2D<T>::Array2D(const Array2D& other){ //other is old object
 	cout << "Inside Copy constructor \n";
 
 	rowCount = other.rowCount;
@@ -50,7 +50,7 @@ Array2D<T>::Array2D(const Array2D& other){ //other id old object
 }
 
 template <typename T>
-void Array2D<T>::m_setDoubleValues(){
+void Array2D<T>::setDoubleValues(){
 	double m_value = 1.1;
 	for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
 		for(int colLoop=0; colLoop< colCount; colLoop++){
@@ -61,7 +61,7 @@ void Array2D<T>::m_setDoubleValues(){
 	}
 
 template <typename T>
-void Array2D<T>::m_getValues(){
+void Array2D<T>::getValues(){
 	for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
 		for(int colLoop=0; colLoop< colCount; colLoop++){
 			do{
@@ -76,7 +76,7 @@ void Array2D<T>::m_getValues(){
 }
 
 template <typename T>
-void Array2D<T>::m_getStringValues(){
+void Array2D<T>::getStringValues(){
 	for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
 		for(int colLoop=0; colLoop< colCount; colLoop++){
 			cin >> array[rowLoop][colLoop];
@@ -85,7 +85,7 @@ void Array2D<T>::m_getStringValues(){
 	}
 
 template <typename T>
-void Array2D<T>::m_displayValues(){
+void Array2D<T>::displayValues(){
 	for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
 		for(int colLoop=0; colLoop< colCount; colLoop++){
 		 cout << array[rowLoop][colLoop] << " ";
@@ -113,14 +113,14 @@ Array2D<T>& Array2D<T>::operator ++ (int) {
 	}
 	if(!isItAString){
 		cout << "Inside post Increment\n";
-		this->m_displayValues();
+		this->displayValues();
 		*this += 1;
 		return *(this);
 	}
 	else{
 
 		cout << "Inside post Increment\n"<< endl;
-		m_displayValues();
+		displayValues();
 
 		for(int rowLoop = 0; rowLoop < rowCount; rowLoop++){
 			for(int colLoop = 0; colLoop < colCount; colLoop++){
@@ -139,14 +139,14 @@ Array2D<T>& Array2D<T>::operator ++ (int) {
 }
 
 template <typename T>
-void Array2D<T>::m_setIncrementedValue(){
+void Array2D<T>::setIncrementedValue(){
 		for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
 			for(int colLoop=0; colLoop< colCount; colLoop++){
 				array[rowLoop][colLoop] = temp[rowLoop][colLoop];
 			}
 		}
 		cout << "Incremented values" << endl;
-		m_displayValues();
+		displayValues();
 }
 
 
@@ -201,7 +201,7 @@ bool Array2D<T>::operator != (const Array2D<T>& other){
 }
 
 template <typename T>
-void Array2D<T>::m_setStringValues(){
+void Array2D<T>::setStringValues(){
 	string m_value = "AB";
 	for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
 		for(int colLoop=0; colLoop< colCount; colLoop++){
