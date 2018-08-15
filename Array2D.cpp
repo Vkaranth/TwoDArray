@@ -7,8 +7,12 @@
 
 #include "Array2D.h"
 #include <iostream>
+#include <stdint.h>
+#include <typeinfo>
+#include <stdlib.h>
 using namespace std;
 
+//int global = 2;
 template <typename T>
 Array2D<T>::Array2D(int rowcount, int colcount, const int max){
 
@@ -101,18 +105,53 @@ Array2D<T> Array2D<T>::operator+(const Array2D<T>& other){
 
 template <typename T>
 Array2D<T>& Array2D<T>::operator ++ (int) {
-	//Array2D<double> temp(rowCount,colCount);
 
-	cout << "Inside post Increment\n";//Working as pre increment
-	this->m_displayValues();
-	*this += 1;
-	return *(this);
+	string val = typeid(T).name();
+	bool isItAString = false;
+	if (val.find("string") != std::string::npos) {
+	    isItAString = true;
+	}
+	if(!isItAString){
+		cout << "Inside post Increment\n";
+		this->m_displayValues();
+		*this += 1;
+		return *(this);
+	}
+	else{
+
+		cout << "Inside post Increment\n"<< endl;
+		m_displayValues();
+
+		for(int rowLoop = 0; rowLoop < rowCount; rowLoop++){
+			for(int colLoop = 0; colLoop < colCount; colLoop++){
+				temp[rowLoop][colLoop] = (*this).array[rowLoop][colLoop];
+	 		}
+		}
+
+		for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
+			for(int colLoop=0; colLoop< colCount; colLoop++){
+				for(int k=0; temp[rowLoop][colLoop][k]!='\0'; k++)
+				    temp[rowLoop][colLoop][k] = temp[rowLoop][colLoop][k] + 1;
+			}
+		}
+
+	}
 }
 
 template <typename T>
-Array2D<T>& Array2D<T>::operator ++ () {
-	//Array2D<double> temp(rowCount,colCount);
+void Array2D<T>::m_setIncrementedValue(){
+		for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
+			for(int colLoop=0; colLoop< colCount; colLoop++){
+				array[rowLoop][colLoop] = temp[rowLoop][colLoop];
+			}
+		}
+		cout << "Incremented values" << endl;
+		m_displayValues();
+}
 
+
+template <typename T>
+Array2D<T>& Array2D<T>::operator ++ () {
 	cout << "Inside pre Increment\n";//Working as pre increment
 	*this += 1;
 	return *(this);
@@ -163,11 +202,11 @@ bool Array2D<T>::operator != (const Array2D<T>& other){
 
 template <typename T>
 void Array2D<T>::m_setStringValues(){
-	char m_value = 'A';
+	string m_value = "AB";
 	for(int rowLoop = 0; rowLoop< rowCount; rowLoop++){
 		for(int colLoop=0; colLoop< colCount; colLoop++){
 			array[rowLoop][colLoop] = m_value;
-			m_value++;
+			//m_value++;
 		}
 	}
 }

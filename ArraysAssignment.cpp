@@ -204,13 +204,18 @@ int main() {
 		Array2D<string> stringSum = stringArray + stringArrayTwo;
 		stringSum.m_displayValues();
 
-		cout << "Incrementing. . .\n";
-		++stringSum;
+//		cout << "Incrementing. . .\n";
+//		++stringSum;
 		stringSum.m_displayValues();
-//		cout << "Matrix available for comparison is :\n";
-//		stringArray.m_displayValues();
+		cout << "Matrix available for comparison is :\n";
+		stringArray.m_displayValues();
 
 		cout << "Postfix operation demonstration\n";
+		stringArray++;
+		cout << "-----------------------------------------------------------" << endl;
+		stringArray.m_setIncrementedValue();
+//		cout << "--------------------------------------------------------------" << endl;
+//		stringArray.m_displayValues();
 
 		cout << "Would you like to manually enter values for another string matrix to compare with the present matrix?(y/n)?\n";
 		char enterAnotherMatrix;
